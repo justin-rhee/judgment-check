@@ -1,5 +1,5 @@
 ---
-name: seat-model-migration
+name: agent-model-migration
 description: Plan and verify a change to an agent session's model or subscription tier without losing active work or silently changing other sessions. Use for authorized model or plan migrations.
 ---
 

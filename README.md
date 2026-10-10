@@ -1,14 +1,16 @@
-# judgment-workflow-skills
+# judgment-check
 
-The original versions assumed my own ledger, command-line tools and handoff files. Copying those instructions to another machine would leave the reader with dependencies they didn't have.
+[![tests](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml/badge.svg)](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml)
 
-I kept the procedures and removed those dependencies. These are three plain-text skills for recording judgments, turning findings into bounded changes, and moving an agent session to another model. They don't install tools or change your configuration.
+Three small skills for agent work you can check: **record a judgment before the outcome is known**, **turn a finding into a bounded change**, and **move an agent session between models**. Each skill is one file, 300-450 words, plain Markdown. They install no tools, run nothing in the background, and leave your settings alone.
+
+They started as my own working files, written for my ledger, my commands and my handoff paths. Those dependencies are gone. What's left runs on whatever record and runtime you already have, which makes the skills portable across machines and agents. It means the only thing they change is what you write down.
 
 ## Use it if
 
-- you want predictions recorded before their outcomes are known
-- lessons need a destination without becoming an automatic policy change
-- a model trial needs a baseline, verification and a way back
+- you want predictions written down before anyone knows the outcome
+- a lesson has to land somewhere without becoming an automatic rule change
+- a model trial needs a baseline, a check and a way back
 
 ## The skills
 
@@ -16,37 +18,34 @@ I kept the procedures and removed those dependencies. These are three plain-text
 | --- | --- |
 | [judgment-loop](skills/judgment-loop/SKILL.md) | prediction records, independent scores and evidence-only reviews |
 | [scale-the-lesson](skills/scale-the-lesson/SKILL.md) | capture, authority boundaries and review of proposed changes |
-| [seat-model-migration](skills/seat-model-migration/SKILL.md) | scoped configuration, uninterrupted work and migration evidence |
+| [agent-model-migration](skills/agent-model-migration/SKILL.md) | scoped configuration, uninterrupted work and migration evidence |
 
 ## Install
 
-Each folder contains a complete `SKILL.md` with a name and description. A runtime that supports this format can load the folders from its documented skill directory. For a project using `.agents/skills`, the copy is:
+Copy the folders you want into your agent's skills folder. For Claude Code that is `~/.claude/skills` (personal) or `.claude/skills` (project); other runtimes use their own documented skills folder, for example `.agents/skills`. From any directory, with your clone of this repository:
 
 ```sh
-mkdir -p .agents/skills
-cp -R skills/judgment-loop .agents/skills/
-cp -R skills/scale-the-lesson .agents/skills/
-cp -R skills/seat-model-migration .agents/skills/
+git clone https://github.com/justin-rhee/judgment-check
+cd judgment-check
+mkdir -p ~/.claude/skills
+cp -R skills/judgment-loop skills/scale-the-lesson skills/agent-model-migration ~/.claude/skills/
 ```
 
-Existing folders with those names need review before replacement. The files can also be read as checklists without installing them. They use your existing record and runtime rather than supplying a writer, scheduler or model launcher.
+If a folder with the same name already exists there, review it before replacing it. The skills also read fine as plain checklists without installing anything. Use your loader's skill list to verify the install; the packaging tests in this repository do not exercise Claude Code.
 
 ## What it won't do
 
-Text instructions cannot enforce tool permissions, make a review independent or prove that a model is calibrated. A host must enforce access restrictions when a blind review requires them. These skills grant no new authority to purchase, restart, send or change shared controls.
+Text can't enforce tool permissions, make a reviewer independent or prove a model is calibrated. If a blind review needs access cut off, the host has to cut it. Nothing here grants new authority to buy, restart, send or change shared settings.
 
-The tests check packaging and broken references, not whether an agent will follow the instructions. No comparative outcome study is claimed. Only macOS has been tested locally. The included CI matrix has not run on a public repository yet.
+## Platforms
+
+macOS and Linux today, standard-library Python only. Windows on the way.
 
 ## How I tested it
 
-```sh
-bash tests/run.sh
-```
-
-Six offline tests load the selected skills, copy them into an empty install directory, and reject missing discovery fields or references outside the bundle. Removing the description check makes its rejection test fail. [TEST-RESULTS.md](TEST-RESULTS.md) records the test scope.
-
+Tested locally on macOS with Python 3.9; the CI matrix is configured and pending its first hosted run. `bash tests/run.sh` runs six offline tests that load the three skills, copy them into an empty install folder from a separate working directory, and reject a skill with no description or one that points outside the bundle. Removing the description check makes its rejection test fail. [TEST-RESULTS.md](TEST-RESULTS.md) records the scope.
 ## License
 
 MIT. See [LICENSE](LICENSE). No warranty. [Security policy](SECURITY.md).
 
-This little tool is one of a handful I pulled out of my own day-to-day agent setup. I use them all myself, so when something breaks I usually notice fast. But if you spot something weird, or just want to ask how it works, open an issue. I read every one. More tools on my [GitHub profile](https://github.com/justin-rhee).
+This is one of a handful of tools I pulled out of my own day-to-day agent setup. I use them all myself, so when something breaks I usually notice fast. If you spot something weird, or just want to ask how it works, open an issue. I read every one. More tools on my [GitHub profile](https://github.com/justin-rhee).

@@ -5,7 +5,7 @@ import tempfile
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
-NAMES=('judgment-loop','scale-the-lesson','seat-model-migration')
+NAMES=('judgment-loop','scale-the-lesson','agent-model-migration')
 
 
 def validate(path):
