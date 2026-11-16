@@ -1,18 +1,8 @@
 # judgment-check
 
-[![tests](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml/badge.svg)](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml)
+[![tests](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml/badge.svg)](https://github.com/justin-rhee/judgment-check/actions/workflows/test.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![format: agent skills](https://img.shields.io/badge/format-agent%20skills-blue.svg) ![nothing to install](https://img.shields.io/badge/runs-nothing%20in%20the%20background-brightgreen.svg)
 
-Three small habits for agent work you can check: **record a judgment before the outcome is known**, **turn a finding into a bounded change**, and **move an agent session between models**. Each habit is one file, 300-450 words, plain Markdown. They install no tools, run nothing in the background, and leave your settings alone.
-
-They started as my own working files, written for my ledger, my commands and my handoff paths. Those dependencies are gone. What's left runs on whatever record and runtime you already have, which makes them portable across machines and agents. It means the only thing they change is what you write down.
-
-## Use it if
-
-- you want predictions written down before anyone knows the outcome
-- a lesson has to land somewhere without becoming an automatic rule change
-- a model trial needs a baseline, a check and a way back
-
-## The habits
+Three short checklists for agent work: write down a guess before you know the answer, turn a lesson into one small change, and move a session to a new model without losing your place.
 
 | Habit | What it guides |
 | --- | --- |
@@ -20,33 +10,47 @@ They started as my own working files, written for my ledger, my commands and my 
 | [scale-the-lesson](skills/scale-the-lesson/SKILL.md) | capture, authority boundaries and review of proposed changes |
 | [agent-model-migration](skills/agent-model-migration/SKILL.md) | scoped configuration, uninterrupted work and migration evidence |
 
+They started as my own working files, written against my ledger, my commands and my handoff paths. I took those out, so what's left runs on whatever record and runtime you already have. The only thing they change is what you write down.
+
+## Use it if
+
+- you want predictions written down before anyone knows the outcome
+- a lesson has to land somewhere without becoming an automatic rule change
+- a model trial needs a baseline, a check and a way back
+
 ## Install
 
-Copy the folders you want into the folder your agent loads them from. For Claude Code that is `~/.claude/skills` (personal) or `.claude/skills` (project); other runtimes document their own folder, for example `.agents/skills`. From any directory, with your clone of this repository:
+Each habit is one Markdown file of 300 to 450 words. Copy the folders into the one your agent loads skills from, `~/.claude/skills` or `.claude/skills` for Claude Code:
 
 ```sh
 git clone https://github.com/justin-rhee/judgment-check
-cd judgment-check
 mkdir -p ~/.claude/skills
-cp -R skills/judgment-loop skills/scale-the-lesson skills/agent-model-migration ~/.claude/skills/
+cp -R judgment-check/skills/* ~/.claude/skills/
 ```
 
-If a folder with the same name already exists there, review it before replacing it. The habits also read fine as plain checklists without installing anything. Use your agent's loader to verify the install; the packaging tests in this repository do not exercise Claude Code.
+Review any folder with the same name before replacing it. They also read fine as plain checklists with nothing installed. Check the install with your agent's own loader, since the tests here don't exercise Claude Code.
 
 ## What it won't do
 
-Text can't enforce tool permissions, make a reviewer independent or prove a model is calibrated. If a blind review needs access cut off, the host has to cut it. Nothing here grants new authority to buy, restart, send or change shared settings.
-
-## Platforms
-
-macOS and Linux today, standard-library Python only. Windows on the way.
+- enforce tool permissions, make a reviewer independent or prove a model is calibrated, since it's text
+- cut off access for a blind review; the host has to do that
+- grant new authority to buy, restart, send or change shared settings
 
 ## How I tested it
 
-Tested locally on macOS with Python 3.9; the CI matrix is configured and pending its first hosted run. `bash tests/run.sh` runs six offline tests that load the three habits, copy them into an empty install folder from a separate working directory, and reject one with no description or one that points outside the bundle. Removing the description check makes its rejection test fail. [TEST-RESULTS.md](TEST-RESULTS.md) records the scope.
+- six offline tests: `bash tests/run.sh`
+- they load the three habits, install them into an empty folder from a separate directory, and reject a habit with no description or one pointing outside the bundle
+- removing the description check makes its rejection test fail; tested locally on macOS with Python 3.9, and [TEST-RESULTS.md](TEST-RESULTS.md) records the scope
 
 ## License
 
-MIT. See [LICENSE](LICENSE). No warranty. [Security policy](SECURITY.md).
+MIT. See [LICENSE](LICENSE). No warranty. Security notes and how to report a problem: [SECURITY.md](SECURITY.md).
 
-This is one of a handful of tools I pulled out of my own day-to-day agent setup. I use them all myself, so when something breaks I usually notice fast. If you spot something weird, or just want to ask how it works, open an issue. I read every one. More tools on my [GitHub profile](https://github.com/justin-rhee).
+<!-- related:start -->
+## Related
+
+- [scar-audit](https://github.com/justin-rhee/scar-audit): shows which written rules your agent quietly skips
+- [linter-selftest](https://github.com/justin-rhee/linter-selftest): proves each lint rule can still fire
+
+Part of a small set of tools I pulled out of my own agent harness. I use them myself and read every issue. More on my [GitHub profile](https://github.com/justin-rhee).
+<!-- related:end -->
