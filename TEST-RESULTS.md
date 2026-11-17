@@ -1,6 +1,6 @@
 # Offline test results
 
-Run on macOS with Python 3.9.6.
+Run on Linux with Python 3.13.18. CI covers Python 3.10 and 3.13 on ubuntu and macOS; 3.10 was not run locally.
 
 `bash tests/run.sh` exited 0. Six packaging tests passed. The mutation check removed the missing-description guard and confirmed one assertion failure with no setup errors. All three files also passed the skill frontmatter validator.
 
