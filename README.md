@@ -40,7 +40,7 @@ Review any folder with the same name before replacing it. They also read fine as
 
 - six offline tests: `bash tests/run.sh`
 - they load the three habits, install them into an empty folder from a separate directory, and reject a habit with no description or one pointing outside the bundle
-- removing the description check makes its rejection test fail; tested locally on macOS with Python 3.9, and [TEST-RESULTS.md](TEST-RESULTS.md) records the scope
+- removing the description check makes its rejection test fail; CI runs Python 3.10 and 3.13, and [TEST-RESULTS.md](TEST-RESULTS.md) records the scope
 
 ## License
 
